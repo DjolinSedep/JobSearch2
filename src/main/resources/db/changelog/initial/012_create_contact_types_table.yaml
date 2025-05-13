@@ -1,0 +1,18 @@
+databaseChangeLog:
+  - changeSet:
+      id: 012
+      author: Sedep
+      changes:
+        - createTable:
+            tableName: contact_types
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: type
+                  type: varchar(255)

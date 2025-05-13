@@ -1,0 +1,21 @@
+databaseChangeLog:
+  - changeSet:
+      id: 005
+      author: Sedep
+      changes:
+        - createTable:
+            tableName: categories
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(255)
+              - column:
+                  name: parent_id
+                  type: BIGINT

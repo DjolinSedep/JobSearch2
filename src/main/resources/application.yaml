@@ -1,0 +1,59 @@
+server:
+  port: 8089
+spring:
+  application:
+    name: job_search
+  mvc:
+    static-path-pattern: /static/**
+  freemarker:
+    expose-session-attributes: true
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+
+  # ------------- DataBases
+  datasource:
+    url: jdbc:h2:./db/JobSearch;AUTO_SERVER=TRUE
+    username: root
+    password: qwerty
+    driver-class-name: org.h2.Driver
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+  #        generate_statistics: true
+
+  liquibase:
+    change-log: classpath:/db/changelog/master.yaml
+
+  output:
+    ansi:
+      enabled: always
+
+  # ------------- Mail
+  mail:
+    host: smtp.gmail.com
+    username: res.pswd.attractor@gmail.com
+    password: udbj mooa cwid osgt
+    port: 587
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+logging:
+  level:
+    root: info
+    org:
+      springframework:
+        security: debug
+  #      hibernate:
+  #        stat: debug
+  file:
+    path: logs

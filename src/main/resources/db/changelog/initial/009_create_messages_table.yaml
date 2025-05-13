@@ -1,0 +1,27 @@
+databaseChangeLog:
+  - changeSet:
+      id: 009
+      author: Sedep
+      changes:
+        - createTable:
+            tableName: messages
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: responded_applicants
+                  type: BIGINT
+                  constraints:
+                    foreignKeyName: fk_messages_responded_applicants
+                    references: responded_applicants(id)
+              - column:
+                  name: content
+                  type: varchar(2000)
+              - column:
+                  name: timestamp
+                  type: timestamp

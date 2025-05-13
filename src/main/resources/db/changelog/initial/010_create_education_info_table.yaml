@@ -1,0 +1,36 @@
+databaseChangeLog:
+  - changeSet:
+      id: 010
+      author: Sedep
+      changes:
+        - createTable:
+            tableName: education_info
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: resume_id
+                  type: BIGINT
+                  constraints:
+                    foreignKeyName: fk_education_info_resume_id
+                    references: resumes(id)
+              - column:
+                  name: institution
+                  type: varchar(1000)
+              - column:
+                  name: program
+                  type: varchar(2000)
+              - column:
+                  name: start_date
+                  type: date
+              - column:
+                  name: end_date
+                  type: date
+              - column:
+                  name: degree
+                  type: varchar(500)

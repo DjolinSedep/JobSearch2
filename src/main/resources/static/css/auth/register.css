@@ -1,0 +1,199 @@
+.register-container {
+    max-width: 800px;
+    margin: 40px auto;
+}
+
+.register-card {
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+}
+
+.register-header {
+    background-color: #6c5ce7;
+    padding: 25px 30px;
+    position: relative;
+}
+
+.register-header::after {
+    content: '';
+    position: absolute;
+    bottom: -15px;
+    left: 0;
+    right: 0;
+    height: 30px;
+    background-color: white;
+    border-radius: 50% 50% 0 0;
+}
+
+.register-header h2 {
+    color: white;
+    font-weight: 600;
+    margin: 0;
+    position: relative;
+    z-index: 1;
+}
+
+.register-header p {
+    color: rgba(255, 255, 255, 0.8);
+    margin: 5px 0 0;
+    position: relative;
+    z-index: 1;
+}
+
+.register-body {
+    padding: 30px;
+}
+
+.form-floating {
+    margin-top: 20px;
+}
+
+.form-floating .form-control {
+    border-radius: 10px;
+    border: 1px solid #e1e1e1;
+    padding: 12px 15px 12px 45px;
+    height: 55px;
+}
+
+.form-floating .form-control:focus {
+    border-color: #6c5ce7;
+    box-shadow: 0 0 0 0.25rem rgba(108, 92, 231, 0.25);
+}
+
+.form-floating label {
+    padding-left: 45px;
+}
+
+.input-icon {
+    position: absolute;
+    left: 15px;
+    top: 17px;
+    color: #6c5ce7;
+    z-index: 2;
+}
+
+.form-select {
+    border-radius: 10px;
+    border: 1px solid #e1e1e1;
+    padding: 12px 15px 12px 45px;
+    height: 55px;
+}
+
+.form-select:focus {
+    border-color: #6c5ce7;
+    box-shadow: 0 0 0 0.25rem rgba(108, 92, 231, 0.25);
+}
+
+.btn-register {
+    background-color: #6c5ce7;
+    border-color: #6c5ce7;
+    color: white;
+    border-radius: 10px;
+    padding: 12px 25px;
+    font-weight: 500;
+    font-size: 1rem;
+    transition: all 0.3s;
+}
+
+.btn-register:hover {
+    background-color: #5649c0;
+    border-color: #5649c0;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(108, 92, 231, 0.3);
+}
+
+.btn-back {
+    background-color: transparent;
+    border-color: #6c5ce7;
+    color: #6c5ce7;
+    border-radius: 10px;
+    padding: 12px 25px;
+    font-weight: 500;
+    font-size: 1rem;
+    transition: all 0.3s;
+}
+
+.btn-back:hover {
+    background-color: rgba(108, 92, 231, 0.1);
+    transform: translateY(-2px);
+}
+
+.error {
+    color: #d63031;
+    font-size: 0.85rem;
+    margin-top: 5px;
+}
+
+.password-requirements {
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    padding: 15px;
+    margin-top: 5px;
+    font-size: 0.85rem;
+}
+
+.password-requirements ul {
+    padding-left: 20px;
+    margin-bottom: 0;
+}
+
+
+.account-type-container {
+    margin-bottom: 25px;
+}
+
+.account-type-title {
+    margin-bottom: 15px;
+    font-weight: 500;
+}
+
+.account-type-options {
+    display: flex;
+    gap: 15px;
+}
+
+.account-type-radio {
+    display: none;
+}
+
+.account-type-label {
+    display: block;
+    flex: 1;
+    border: 2px solid #e1e1e1;
+    border-radius: 10px;
+    padding: 15px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.account-type-radio:checked + .account-type-label {
+    border-color: #6c5ce7;
+    background-color: rgba(108, 92, 231, 0.1);
+}
+
+.account-type-label:hover {
+    border-color: #a29bfe;
+    background-color: rgba(162, 155, 254, 0.05);
+}
+
+.account-type-icon {
+    font-size: 2rem;
+    color: #6c5ce7;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.account-type-name {
+    font-weight: 600;
+    margin: 0;
+    font-size: 1rem;
+}
+
+.account-type-desc {
+    margin: 5px 0 0;
+    color: #6c757d;
+    font-size: 0.85rem;
+}

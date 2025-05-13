@@ -1,0 +1,30 @@
+databaseChangeLog:
+  - changeSet:
+      id: 008
+      author: Sedep
+      changes:
+        - createTable:
+            tableName: responded_applicants
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: resume_id
+                  type: BIGINT
+                  constraints:
+                    foreignKeyName: fk_responded_applicants_resume_id
+                    references: resumes(id)
+              - column:
+                  name: vacancy_id
+                  type: BIGINT
+                  constraints:
+                    foreignKeyName: fk_responded_applicants_vacancy_id
+                    references: vacancies(id)
+              - column:
+                  name: confirmation
+                  type: Boolean

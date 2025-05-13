@@ -1,0 +1,33 @@
+databaseChangeLog:
+  - changeSet:
+      id: 011
+      author: Sedep
+      changes:
+        - createTable:
+            tableName: work_experience_info
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: resume_id
+                  type: BIGINT
+                  constraints:
+                    foreignKeyName: fk_work_experience_info_resume_id
+                    references: resumes(id)
+              - column:
+                  name: years
+                  type: int
+              - column:
+                  name: company_name
+                  type: varchar(500)
+              - column:
+                  name: position
+                  type: varchar(500)
+              - column:
+                  name: responsibilities
+                  type: varchar(2000)

@@ -1,0 +1,42 @@
+databaseChangeLog:
+  - changeSet:
+      id: 007
+      author: Sedep
+      changes:
+        - createTable:
+            tableName: resumes
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: applicant_id
+                  type: BIGINT
+                  constraints:
+                    foreignKeyName: fk_resumes_applicant_id
+                    references: users(id)
+              - column:
+                  name: name
+                  type: varchar(500)
+              - column:
+                  name: category_id
+                  type: BIGINT
+                  constraints:
+                    foreignKeyName: fk_resumes_category_id
+                    references: categories(id)
+              - column:
+                  name: salary
+                  type: Integer
+              - column:
+                  name: is_active
+                  type: Boolean
+              - column:
+                  name: created_date
+                  type: timestamp
+              - column:
+                  name: update_time
+                  type: timestamp
