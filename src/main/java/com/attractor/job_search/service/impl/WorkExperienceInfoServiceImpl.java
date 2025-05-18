@@ -1,15 +1,18 @@
 package com.attractor.job_search.service.impl;
 
 import com.attractor.job_search.dto.WorkExperienceInfoDto;
+import com.attractor.job_search.model.Message;
 import com.attractor.job_search.model.Resume;
 import com.attractor.job_search.model.WorkExperienceInfo;
 import com.attractor.job_search.repository.WorkExperienceInfoRepository;
 import com.attractor.job_search.service.WorkExperienceInfoService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -20,6 +23,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class WorkExperienceInfoServiceImpl implements WorkExperienceInfoService {
     private final WorkExperienceInfoRepository workExperienceInfoRepository;
+    private final MessageSource messageSource;
 
 
     @Override
@@ -86,13 +90,13 @@ public class WorkExperienceInfoServiceImpl implements WorkExperienceInfoService 
 
 
     @Override
-    public void validateWorkExperience(List<WorkExperienceInfoDto> workExperienceInfoList, Integer userAge) {
+    public void validateWorkExperience(List<WorkExperienceInfoDto> workExperienceInfoList, Integer userAge, Locale locale) {
         if (workExperienceInfoList == null || workExperienceInfoList.isEmpty()) {
             return;
         }
 
         for (WorkExperienceInfoDto workExperienceInfo : workExperienceInfoList) {
-            validateSingleWorkExperience(workExperienceInfo, userAge);
+            validateSingleWorkExperience(workExperienceInfo, userAge, locale);
         }
 
         int totalExperience = workExperienceInfoList.stream()
@@ -104,13 +108,14 @@ public class WorkExperienceInfoServiceImpl implements WorkExperienceInfoService 
 
         if (totalExperience > maxPossibleYears) {
             throw new IllegalArgumentException(
-                    String.format("Общий стаж работы (%d) не может превышать возможное количество лет в зависимости от возраста (%d)",
-                            totalExperience, maxPossibleYears));
+                    messageSource.getMessage("workExperience.total.exceedsMaximum",
+                            new Object[]{totalExperience, maxPossibleYears},
+                            locale));
         }
     }
 
 
-    private void validateSingleWorkExperience(WorkExperienceInfoDto workExperienceInfo, Integer userAge) {
+    private void validateSingleWorkExperience(WorkExperienceInfoDto workExperienceInfo, Integer userAge, Locale locale) {
         if (workExperienceInfo == null || workExperienceInfo.getYears() == null) {
             return;
         }
@@ -119,12 +124,14 @@ public class WorkExperienceInfoServiceImpl implements WorkExperienceInfoService 
 
         if (workExperienceInfo.getYears() > maxPossibleYears) {
             throw new IllegalArgumentException(
-                    String.format("Количество лет опыта работы (%d) не может превышать возможное количество лет в зависимости от возраста (%d)",
-                            workExperienceInfo.getYears(), maxPossibleYears));
+                    messageSource.getMessage("workExperience.years.exceedsMaximum",
+                            new Object[]{workExperienceInfo.getYears(), maxPossibleYears},
+                            locale));
         }
 
         if (workExperienceInfo.getYears() < 0) {
-            throw new IllegalArgumentException("Колество лет опыта работы не может быть отрицательным");
+            throw new IllegalArgumentException(
+                    messageSource.getMessage("workExperience.years.negative", null, locale));
         }
     }
 

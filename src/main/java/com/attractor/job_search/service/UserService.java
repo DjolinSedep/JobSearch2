@@ -9,10 +9,11 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.web.servlet.LocaleResolver;
 
 import java.io.IOException;
+import java.util.Locale;
 import java.util.Map;
 
 public interface UserService {
-    void registerNewUser(UserRegistrationDto registrationDto);
+    void registerNewUser(UserRegistrationDto registrationDto, Locale locale);
 
     void editUser(UserEditDto editDto) throws IOException;
 
@@ -22,11 +23,11 @@ public interface UserService {
 
     User getUserById(Long userId);
 
-    Map<String, Object> forgotPassword(HttpServletRequest request);
+    Map<String, Object> forgotPassword(HttpServletRequest request, Locale locale);
 
     Map<String, Object> resetPasswordGet(String token);
 
-    Map<String, Object> resetPasswordPost(HttpServletRequest request);
+    Map<String, Object> resetPasswordPost(HttpServletRequest request, Locale locale);
 
     void determineLocaleForUser(HttpServletRequest request, HttpServletResponse response, LocaleResolver localeResolver);
 

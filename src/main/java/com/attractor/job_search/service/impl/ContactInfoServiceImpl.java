@@ -47,30 +47,39 @@ public class ContactInfoServiceImpl implements ContactInfoService {
     @Override
     public void updateOrCreateContacts(List<ContactInfoDto> dtoList, Resume resume) {
         if (dtoList == null || dtoList.isEmpty()) {
+            System.out.println("return");
             return;
         }
 
+        System.out.println("noreturn");
         List<ContactInfo> existingRecords = contactInfoRepository.findByResumeId(resume.getId());
         Map<Long, ContactInfo> existingRecordsMap = existingRecords.stream()
                 .collect(Collectors.toMap(ContactInfo::getId, Function.identity(), (a, b) -> a));
 
         for (ContactInfoDto dto : dtoList) {
+            System.out.println(dto.getValue() + dto.getContactType().getType() + dto.getValue());
             if (!hasContactData(dto)) {
+                System.out.println("continue");
                 continue;
             }
+            System.out.println("nocontinue");
             ContactInfo contactInfo;
 
             if (dto.getId() != null && existingRecordsMap.containsKey(dto.getId())) {
+                System.out.println("existing record found");
                 contactInfo = existingRecordsMap.get(dto.getId());
             } else {
+                System.out.println("new record found");
                 contactInfo = new ContactInfo();
                 contactInfo.setResume(resume);
             }
-            if(dto.getContactType().getId() == null){
+            if(dto.getContactType().getId() != null){
+                System.out.println("contactType found");
                 ContactType contactType = contactTypeService.getContactTypeById(dto.getContactType().getId());
                 contactInfo.setContactType(contactType);
             }
 
+            System.out.println("setting");
             contactInfo.setContactValue(dto.getValue());
 
             contactInfoRepository.save(contactInfo);
@@ -78,6 +87,7 @@ public class ContactInfoServiceImpl implements ContactInfoService {
     }
 
     private boolean hasContactData(ContactInfoDto dto) {
+        System.out.println("validate");
         return dto != null &&
                 dto.getContactType() != null &&
                 dto.getContactType().getId() != null &&

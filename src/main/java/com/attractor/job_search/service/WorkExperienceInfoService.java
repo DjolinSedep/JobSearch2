@@ -6,6 +6,7 @@ import com.attractor.job_search.model.WorkExperienceInfo;
 
 
 import java.util.List;
+import java.util.Locale;
 
 public interface WorkExperienceInfoService {
 
@@ -13,7 +14,7 @@ public interface WorkExperienceInfoService {
 
     void updateOrCreateWorkExperiences(List<WorkExperienceInfoDto> dtoList, Resume resume);
 
-    void validateWorkExperience(List<WorkExperienceInfoDto> workExperienceInfoList, Integer userAge);
+    void validateWorkExperience(List<WorkExperienceInfoDto> workExperienceInfoList, Integer userAge, Locale locale);
 
     List<WorkExperienceInfoDto> convertToWorkExperienceInfoList(List<WorkExperienceInfo> workExperienceInfoList);
 

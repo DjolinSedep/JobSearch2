@@ -12,30 +12,30 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class UserRegistrationDto {
 
-    @NotBlank(message = "Заполните имя")
+    @NotBlank(message = "{validation.user.name.blank}")
     private String name;
 
-    @NotBlank(message = "Заполните фамилию")
+    @NotBlank(message = "{validation.user.surname.blank}")
     private String surname;
 
-    @NotNull(message = "Введите возраст")
-    @Min(value = 18, message = "Возраст должен быть не менее 18 лет")
+    @NotNull(message = "{validation.user.age.null}")
+    @Min(value = 18, message = "{validation.user.age.min}")
     private Integer age;
 
-    @NotBlank(message = "Заполните email")
-    @Email(message = "Некорректный формат email")
+    @NotBlank(message = "{validation.user.email.blank}")
+    @Email(message = "{validation.user.email.invalid}")
     private String email;
 
-    @NotBlank(message = "Заполните пароль")
-    @Size(min = 6, message = "Пароль должен содержать не менее 6 символов")
+    @NotBlank(message = "{validation.user.password.blank}")
+    @Size(min = 6, message = "{validation.user.password.size}")
     @Pattern(regexp = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).+$",
-            message = "Пароль должен содержать как минимум одну заглавную букву и одну цифру")
+            message = "{validation.user.password.pattern}")
     private String password;
 
-    @NotBlank(message = "Номер телефона не может быть пустым")
-    @Pattern(regexp = "^\\+?[0-9]{10,15}$", message = "Некорректный формат номера телефона")
+    @NotBlank(message = "{validation.user.phoneNumber.blank}")
+    @Pattern(regexp = "^\\+?[0-9]{10,15}$", message = "{validation.user.phoneNumber.pattern}")
     private String phoneNumber;
 
-    @NotBlank(message = "Тип аккаунта должен быть выбран")
+    @NotBlank(message = "{validation.user.accountType.blank}")
     private String accountType;
 }

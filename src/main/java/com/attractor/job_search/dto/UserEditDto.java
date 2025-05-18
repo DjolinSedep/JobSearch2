@@ -14,18 +14,15 @@ import org.springframework.web.multipart.MultipartFile;
 @AllArgsConstructor
 public class UserEditDto {
     private Long id;
-    @NotBlank(message = "Заполните имя")
+    @NotBlank(message = "{validation.user.name.blank}")
     private String name;
     private String email;
-
-    @NotBlank(message = "Заполните фамилию")
+    @NotBlank(message = "{validation.user.surname.blank}")
     private String surname;
-
-    @NotBlank(message = "Введите номер телефона")
-    @Pattern(regexp = "^\\+?[0-9]{10,15}$", message = "Некорректный формат номера телефона")
+    @NotBlank(message = "{validation.user.phoneNumber.blank}")
+    @Pattern(regexp = "^\\+?[0-9]{10,15}$", message = "{validation.user.phoneNumber.pattern}")
     private String phoneNumber;
     private MultipartFile avatar;
     private String role;
     private String avatarFileName;
-
 }

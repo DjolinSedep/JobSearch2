@@ -11,11 +11,13 @@ import com.attractor.job_search.service.UserService;
 import com.attractor.job_search.service.VacancyService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.MessageSource;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Locale;
 import java.util.NoSuchElementException;
 import java.util.Objects;
 
@@ -26,7 +28,7 @@ public class VacancyServiceImpl implements VacancyService {
     private final VacancyRepository vacancyRepository;
     private final CategoryService categoryService;
     private final UserService userService;
-    private final ResumeService resumeService;
+    private final MessageSource messageSource;
 
 
     @Override
@@ -97,10 +99,11 @@ public class VacancyServiceImpl implements VacancyService {
 
 
     @Override
-    public void create(VacancyDto vacancyDto){
+    public void create(VacancyDto vacancyDto, Locale locale){
         if (vacancyDto.getExpFrom() !=null && vacancyDto.getExpTo() !=null &&
                 (Objects.equals(vacancyDto.getExpFrom(), vacancyDto.getExpTo()) || vacancyDto.getExpFrom() > vacancyDto.getExpTo() || vacancyDto.getExpTo() > 60)){
-            throw new IllegalArgumentException("Некорректно введено значение опыта работы");
+            throw new IllegalArgumentException(
+                    messageSource.getMessage("vacancy.experience.invalid", null, locale));
         }
 
         Category category = categoryService.getCategoryById(vacancyDto.getCategory().getId());
@@ -122,10 +125,11 @@ public class VacancyServiceImpl implements VacancyService {
 
 
     @Override
-    public void edit(VacancyDto vacancyDto){
+    public void edit(VacancyDto vacancyDto, Locale locale){
         if (vacancyDto.getExpFrom() !=null && vacancyDto.getExpTo() !=null &&
                 (Objects.equals(vacancyDto.getExpFrom(), vacancyDto.getExpTo()) || vacancyDto.getExpFrom() > vacancyDto.getExpTo() || vacancyDto.getExpTo() > 60)){
-            throw new IllegalArgumentException("Некорректно введено значение опыта работы");
+            throw new IllegalArgumentException(
+                    messageSource.getMessage("vacancy.experience.invalid", null, locale));
         }
         Vacancy vacancy = vacancyRepository.findById(vacancyDto.getId())
                 .orElseThrow(() -> new NoSuchElementException("Vacancy not found") );

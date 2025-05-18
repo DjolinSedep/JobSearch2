@@ -5,6 +5,7 @@ import com.attractor.job_search.model.EducationInfo;
 import com.attractor.job_search.model.Resume;
 
 import java.util.List;
+import java.util.Locale;
 
 public interface EducationInfoService {
 
@@ -12,7 +13,7 @@ public interface EducationInfoService {
 
     void updateOrCreateEducations(List<EducationInfoDto> dtoList, Resume resume);
 
-    void validateEducationDates(List<EducationInfoDto> educationInfoList, Integer userAge);
+    void validateEducationDates(List<EducationInfoDto> educationInfoList, Integer userAge, Locale locale);
 
     List<EducationInfoDto> convertToEducationInfoDtoList(List<EducationInfo> educationInfoList);
 

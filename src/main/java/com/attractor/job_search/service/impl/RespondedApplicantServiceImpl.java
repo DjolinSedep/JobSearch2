@@ -10,7 +10,10 @@ import com.attractor.job_search.service.UserService;
 import com.attractor.job_search.service.VacancyService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
+
+import java.util.Locale;
 
 @Slf4j
 @Service
@@ -19,15 +22,16 @@ public class RespondedApplicantServiceImpl implements RespondedApplicantService 
     private final RespondedApplicantRepository respondedApplicantRepository;
     private final VacancyService vacancyService;
     private final ResumeService resumeService;
-    private final UserService userService;
+    private final MessageSource messageSource;
 
     @Override
-    public void applyToVacancy(Long resumeId, Long vacancyId) {
+    public void applyToVacancy(Long resumeId, Long vacancyId, Locale locale) {
         Resume resume = resumeService.getResumeById(resumeId);
         Vacancy vacancy = vacancyService.getVacancyById(vacancyId);
         boolean alreadyResponded = respondedApplicantRepository.existsByResumeAndVacancy(resume, vacancy);
         if (alreadyResponded) {
-            throw new IllegalStateException("Вы уже откликнулись на эту вакансию c этим резюме");
+            throw new IllegalStateException(
+                    messageSource.getMessage("vacancy.response.alreadyApplied", null, locale));
         }
 
         RespondedApplicant respondedApplicant = new RespondedApplicant();

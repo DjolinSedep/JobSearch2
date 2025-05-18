@@ -7,6 +7,7 @@ import com.attractor.job_search.service.ResumeService;
 import com.attractor.job_search.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -17,6 +18,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.Locale;
 
 @Controller
 @RequiredArgsConstructor
@@ -50,7 +53,8 @@ public class ResumeController {
     public String createResume(@Valid ResumeDto resumeDto, BindingResult bindingResult, Model model) {
         try {
             if (!bindingResult.hasErrors()) {
-                resumeService.create(resumeDto);
+                Locale locale = LocaleContextHolder.getLocale();
+                resumeService.create(resumeDto, locale);
                 return "redirect:/users/profile";
             }
             model.addAttribute("resumeDto", resumeDto);
@@ -80,8 +84,9 @@ public class ResumeController {
     public String editResume(@PathVariable Long id, @Valid ResumeDto resumeDto, BindingResult bindingResult, Model model) {
         try{
             if (!bindingResult.hasErrors()){
+                Locale locale = LocaleContextHolder.getLocale();
                 resumeDto.setId(id);
-                resumeService.edit(resumeDto);
+                resumeService.edit(resumeDto, locale);
                 return "redirect:/users/profile";
             }
             model.addAttribute("resumeDto", resumeDto);

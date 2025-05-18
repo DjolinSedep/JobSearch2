@@ -183,24 +183,24 @@
                             <div class="col-md-6">
                                 <label for="contactInfoList0.contactTypeId" class="form-label"><@spring.message "resume.edit.contactType"/></label>
                                 <select class="form-select" id="contactInfoList0.contactTypeId"
-                                        name="contactInfoList[0].contactTypeId">
+                                        name="contactInfoList[0].contactType.id">
                                     <option value="" disabled <#if !(resumeDto.contactInfoList[0].contactTypeId)??>selected</#if>><@spring.message "resume.edit.selectContactType"/></option>
                                     <#if contactTypes??>
                                         <#list contactTypes as contactType>
                                             <option value="${contactType.id}" <#if (resumeDto.contactInfoList[0].contactTypeId)?? && resumeDto.contactInfoList[0].contactTypeId == contactType.id>selected</#if>>${contactType.name}</option>
                                         </#list>
                                     <#else>
-                                        <option value="1" <#if (resumeDto.contactInfoList[0].contactTypeId)?? && resumeDto.contactInfoList[0].contactTypeId == 1>selected</#if>>Email</option>
-                                        <option value="2" <#if (resumeDto.contactInfoList[0].contactTypeId)?? && resumeDto.contactInfoList[0].contactTypeId == 2>selected</#if>>Телефон</option>
-                                        <option value="3" <#if (resumeDto.contactInfoList[0].contactTypeId)?? && resumeDto.contactInfoList[0].contactTypeId == 3>selected</#if>>Telegram</option>
-                                        <option value="4" <#if (resumeDto.contactInfoList[0].contactTypeId)?? && resumeDto.contactInfoList[0].contactTypeId == 4>selected</#if>>WhatsApp</option>
-                                        <option value="5" <#if (resumeDto.contactInfoList[0].contactTypeId)?? && resumeDto.contactInfoList[0].contactTypeId == 5>selected</#if>>Facebook</option>
-                                        <option value="6" <#if (resumeDto.contactInfoList[0].contactTypeId)?? && resumeDto.contactInfoList[0].contactTypeId == 6>selected</#if>>LinkedIn</option>
-                                        <option value="7" <#if (resumeDto.contactInfoList[0].contactTypeId)?? && resumeDto.contactInfoList[0].contactTypeId == 7>selected</#if>>Skype</option>
-                                        <option value="8" <#if (resumeDto.contactInfoList[0].contactTypeId)?? && resumeDto.contactInfoList[0].contactTypeId == 8>selected</#if>>GitHub</option>
-                                        <option value="9" <#if (resumeDto.contactInfoList[0].contactTypeId)?? && resumeDto.contactInfoList[0].contactTypeId == 9>selected</#if>>Личный сайт</option>
-                                        <option value="10" <#if (resumeDto.contactInfoList[0].contactTypeId)?? && resumeDto.contactInfoList[0].contactTypeId == 10>selected</#if>>VK</option>
-                                        <option value="11" <#if (resumeDto.contactInfoList[0].contactTypeId)?? && resumeDto.contactInfoList[0].contactTypeId == 11>selected</#if>>Instagram</option>
+                                        <option value="1" <#if (resumeDto.contactInfoList[0].contactType.id)?? && resumeDto.contactInfoList[0].contactType.id == 1>selected</#if>>Email</option>
+                                        <option value="2" <#if (resumeDto.contactInfoList[0].contactType.id)?? && resumeDto.contactInfoList[0].contactType.id == 2>selected</#if>>Телефон</option>
+                                        <option value="3" <#if (resumeDto.contactInfoList[0].contactType.id)?? && resumeDto.contactInfoList[0].contactType.id == 3>selected</#if>>Telegram</option>
+                                        <option value="4" <#if (resumeDto.contactInfoList[0].contactType.id)?? && resumeDto.contactInfoList[0].contactType.id == 4>selected</#if>>WhatsApp</option>
+                                        <option value="5" <#if (resumeDto.contactInfoList[0].contactType.id)?? && resumeDto.contactInfoList[0].contactType.id == 5>selected</#if>>Facebook</option>
+                                        <option value="6" <#if (resumeDto.contactInfoList[0].contactType.id)?? && resumeDto.contactInfoList[0].contactType.id == 6>selected</#if>>LinkedIn</option>
+                                        <option value="7" <#if (resumeDto.contactInfoList[0].contactType.id)?? && resumeDto.contactInfoList[0].contactType.id == 7>selected</#if>>Skype</option>
+                                        <option value="8" <#if (resumeDto.contactInfoList[0].contactType.id)?? && resumeDto.contactInfoList[0].contactType.id == 8>selected</#if>>GitHub</option>
+                                        <option value="9" <#if (resumeDto.contactInfoList[0].contactType.id)?? && resumeDto.contactInfoList[0].contactType.id == 9>selected</#if>>Личный сайт</option>
+                                        <option value="10" <#if (resumeDto.contactInfoList[0].contactType.id)?? && resumeDto.contactInfoList[0].contactType.id == 10>selected</#if>>VK</option>
+                                        <option value="11" <#if (resumeDto.contactInfoList[0].contactType.id)?? && resumeDto.contactInfoList[0].contactType.id == 11>selected</#if>>Instagram</option>
                                     </#if>
                                 </select>
                             </div>

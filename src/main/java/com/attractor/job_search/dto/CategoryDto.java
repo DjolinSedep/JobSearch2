@@ -10,7 +10,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CategoryDto {
-    @NotNull(message = "Выберите категорию")
+    @NotNull(message = "{validation.category.id.null}")
     private Long id;
     private String name;
 }

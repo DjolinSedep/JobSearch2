@@ -19,9 +19,9 @@ public interface VacancyService {
 
     Page<VacancyDto> getVacanciesByAuthorId(Long authorId, Pageable pageable);
 
-    void create(VacancyDto vacancyDto);
+    void create(VacancyDto vacancyDto, Locale locale);
 
-    void edit(VacancyDto vacancyDto);
+    void edit(VacancyDto vacancyDto, Locale locale);
 
     void updateVacancyTime(Long vacancyId);
 

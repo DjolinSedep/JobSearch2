@@ -7,11 +7,13 @@ import com.attractor.job_search.repository.EducationInfoRepository;
 import com.attractor.job_search.service.EducationInfoService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -22,6 +24,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class EducationInfoServiceImpl implements EducationInfoService {
     private final EducationInfoRepository educationInfoRepository;
+    private final MessageSource messageSource;
 
 
     @Override
@@ -101,18 +104,18 @@ public class EducationInfoServiceImpl implements EducationInfoService {
 
 
     @Override
-    public void validateEducationDates(List<EducationInfoDto> educationInfoList, Integer userAge) {
+    public void validateEducationDates(List<EducationInfoDto> educationInfoList, Integer userAge, Locale locale) {
         if (educationInfoList == null || educationInfoList.isEmpty()) {
             return;
         }
 
         for (EducationInfoDto educationInfo : educationInfoList) {
-            validateSingleEducationDates(educationInfo, userAge);
+            validateSingleEducationDates(educationInfo, userAge, locale);
         }
     }
 
 
-    private void validateSingleEducationDates(EducationInfoDto educationInfo, Integer userAge) {
+    private void validateSingleEducationDates(EducationInfoDto educationInfo, Integer userAge, Locale locale) {
         if (educationInfo == null || educationInfo.getStartDate() == null || educationInfo.getEndDate() == null) {
             return;
         }
@@ -126,17 +129,20 @@ public class EducationInfoServiceImpl implements EducationInfoService {
                 .atZone(ZoneId.systemDefault()).toLocalDate();
 
         if (startDate.isAfter(endDate)) {
-            throw new IllegalArgumentException("Дата начала образования не может быть позже даты окончания.");
+            throw new IllegalArgumentException(
+                    messageSource.getMessage("education.startDate.afterEndDate", null, locale));
         }
 
         LocalDate earliestPossibleEducationDate = currentDate.minusYears(userAge).plusYears(6);
 
         if (startDate.isBefore(earliestPossibleEducationDate)) {
-            throw new IllegalArgumentException("Дата начала обучения слишком ранняя для возраста пользователя");
+            throw new IllegalArgumentException(
+                    messageSource.getMessage("education.startDate.tooEarly", null, locale));
         }
 
         if (endDate.isAfter(currentDate)) {
-            throw new IllegalArgumentException("Дата окончания обучения не может быть в будущем.");
+            throw new IllegalArgumentException(
+                    messageSource.getMessage("education.endDate.future", null, locale));
         }
     }
 

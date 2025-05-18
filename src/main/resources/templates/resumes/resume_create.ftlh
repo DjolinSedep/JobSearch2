@@ -165,7 +165,7 @@
                             <div class="col-md-6">
                                 <label for="contactInfoList0.contactTypeId" class="form-label"><@spring.message "resume.create.contactType"/></label>
                                 <select class="form-select" id="contactInfoList0.contactTypeId"
-                                        name="contactInfoList[0].contactTypeId">
+                                        name="contactInfoList[0].contactType.id">
                                     <option value="" selected disabled><@spring.message "resume.create.selectContactType"/></option>
                                     <#if contactTypes??>
                                         <#list contactTypes as contactType>
@@ -182,7 +182,7 @@
                                         <option value="8">GitHub</option>
                                         <option value="9">Личный сайт</option>
                                         <option value="10">VK</option>
-                                        <option value="10">Instagram</option>
+                                        <option value="11">Instagram</option>
                                     </#if>
                                 </select>
                             </div>

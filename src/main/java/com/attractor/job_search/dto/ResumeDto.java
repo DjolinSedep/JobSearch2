@@ -17,12 +17,12 @@ import java.util.List;
 @AllArgsConstructor
 public class ResumeDto {
     private Long id;
-    @NotBlank(message = "Введите название")
+    @NotBlank(message = "{validation.resume.name.blank}")
     private String name;
-    @NotBlank(message = "Укажите зарплату")
-    @Pattern(regexp = "^[1-9]\\d*$", message = "Поле должно содержать только цифры и только положительные")
+    @NotBlank(message = "{validation.resume.salary.blank}")
+    @Pattern(regexp = "^[1-9]\\d*$", message = "{validation.resume.salary.pattern}")
     private String salary;
-    @NotNull(message = "Выберите категорию")
+    @NotNull(message = "{validation.resume.category.null}")
     private Long categoryId;
     private String categoryName;
     private LocalDateTime updateTime;

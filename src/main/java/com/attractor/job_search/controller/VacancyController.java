@@ -7,6 +7,7 @@ import com.attractor.job_search.service.UserService;
 import com.attractor.job_search.service.VacancyService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -15,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Locale;
 
 
 @Controller
@@ -54,7 +56,8 @@ public class VacancyController {
     public String createVacancy(@Valid VacancyDto vacancyDto, BindingResult bindingResult, Model model) {
         try {
             if (!bindingResult.hasErrors()) {
-                vacancyService.create(vacancyDto);
+                Locale locale = LocaleContextHolder.getLocale();
+                vacancyService.create(vacancyDto, locale);
                 return "redirect:/users/profile";
             }
             model.addAttribute("vacancyDto", vacancyDto);
@@ -87,7 +90,8 @@ public class VacancyController {
         try {
             if (!bindingResult.hasErrors()) {
                 vacancyDto.setId(vacancyId);
-                vacancyService.edit(vacancyDto);
+                Locale locale = LocaleContextHolder.getLocale();
+                vacancyService.edit(vacancyDto, locale);
                 return "redirect:/users/profile";
             }
             vacancyDto.setId(vacancyId);

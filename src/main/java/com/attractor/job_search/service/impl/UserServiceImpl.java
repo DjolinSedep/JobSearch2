@@ -15,6 +15,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.MessageSource;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -36,11 +37,13 @@ public class UserServiceImpl implements UserService {
     private final RoleService roleService;
     private final ImageService imageService;
     private final EmailService emailService;
+    private final MessageSource messageSource;
 
     @Override
-    public void registerNewUser(UserRegistrationDto registrationDto) {
+    public void registerNewUser(UserRegistrationDto registrationDto, Locale locale) {
         if (checkUserExistingByEmail(registrationDto.getEmail())) {
-            throw new IllegalArgumentException("Пользователь с указанным email уже существует");
+            throw new IllegalArgumentException(
+                    messageSource.getMessage("user.email.alreadyExists", null, locale));
         }
         User user = new User();
         user.setName(registrationDto.getName());
@@ -101,15 +104,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Map<String, Object> forgotPassword(HttpServletRequest request){
+    public Map<String, Object> forgotPassword(HttpServletRequest request, Locale locale) {
         Map<String, Object> model = new HashMap<>();
         try {
             makeResetPasswordLink(request);
-            model.put("message", "Мы отправили ссылку для изменения пароля на ваш email");
-        } catch (UsernameNotFoundException | UnsupportedEncodingException e){
+            model.put("message", messageSource.getMessage("password.reset.linkSent", null, locale));
+        } catch (UsernameNotFoundException | UnsupportedEncodingException e) {
             model.put("error", e.getMessage());
-        } catch (MessagingException e){
-            model.put("error", "Ошибка при отправке ссылки на ваш email");
+        } catch (MessagingException e) {
+            model.put("error", messageSource.getMessage("password.reset.emailError", null, locale));
         }
         return model;
     }
@@ -150,15 +153,14 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public Map<String, Object> resetPasswordPost(HttpServletRequest request) {
+    public Map<String, Object> resetPasswordPost(HttpServletRequest request, Locale locale) {
         Map<String, Object> model = new HashMap<>();
         String token = request.getParameter("token");
         String password = request.getParameter("password");
 
-
-        List<String> validationErrors = validatePassword(password);
+        List<String> validationErrors = validatePassword(password, locale);
         if (!validationErrors.isEmpty()) {
-            model.put("message", "Ошибка валидации пароля:");
+            model.put("message", messageSource.getMessage("password.validation.error", null, locale));
             model.put("errors", validationErrors);
             return model;
         }
@@ -166,9 +168,9 @@ public class UserServiceImpl implements UserService {
         try {
             User user = getByToken(token);
             updatePassword(user, password);
-            model.put("message", "Пароль успешно изменен.");
+            model.put("message", messageSource.getMessage("password.reset.success", null, locale));
         } catch (UsernameNotFoundException e) {
-            model.put("message", "Invalid token");
+            model.put("message", messageSource.getMessage("password.reset.invalidToken", null, locale));
         }
         return model;
     }
@@ -181,28 +183,28 @@ public class UserServiceImpl implements UserService {
 
 
 
-    private List<String> validatePassword(String password) {
+    private List<String> validatePassword(String password, Locale locale) {
         List<String> errors = new ArrayList<>();
 
         if (password == null || password.isEmpty()) {
-            errors.add("Пароль не может быть пустым.");
+            errors.add(messageSource.getMessage("password.validation.empty", null, locale));
             return errors;
         }
 
         if (password.length() < 8) {
-            errors.add("Пароль должен содержать не менее 8 символов.");
+            errors.add(messageSource.getMessage("password.validation.length", null, locale));
         }
 
         if (!password.matches(".*[A-Z].*")) {
-            errors.add("Пароль должен содержать хотя бы одну заглавную букву.");
+            errors.add(messageSource.getMessage("password.validation.uppercase", null, locale));
         }
 
         if (!password.matches(".*[a-z].*")) {
-            errors.add("Пароль должен содержать хотя бы одну строчную букву.");
+            errors.add(messageSource.getMessage("password.validation.lowercase", null, locale));
         }
 
         if (!password.matches(".*\\d.*")) {
-            errors.add("Пароль должен содержать хотя бы одну цифру.");
+            errors.add(messageSource.getMessage("password.validation.digit", null, locale));
         }
 
         return errors;

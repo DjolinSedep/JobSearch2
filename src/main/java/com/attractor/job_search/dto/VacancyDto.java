@@ -20,23 +20,25 @@ import java.time.LocalDateTime;
 public class VacancyDto {
     private Long id;
 
-    @NotBlank(message = "Заполните название")
+    @NotBlank(message = "{validation.vacancy.name.blank}")
     private String name;
 
-    @NotBlank(message = "Заполните описание")
+    @NotBlank(message = "{validation.vacancy.description.blank}")
     private String description;
+
     @Valid
     private CategoryDto category;
 
-    @NotBlank(message = "Укажите зарплату")
-    @Pattern(regexp = "^[1-9]\\d*$", message = "Поле должно содержать только цифры")
+    @NotBlank(message = "{validation.vacancy.salary.blank}")
+    @Pattern(regexp = "^[1-9]\\d*$", message = "{validation.vacancy.salary.pattern}")
     private String salary;
 
-    @Min(value = 0, message = "Опыт должен быть неотрицательным")
+    @Min(value = 0, message = "{validation.vacancy.expFrom.min}")
     private Integer expFrom;
 
-    @Min(value = 0, message = "Опыт должен быть неотрицательным")
+    @Min(value = 0, message = "{validation.vacancy.expTo.min}")
     private Integer expTo;
+
     private Boolean isActive;
     private String authorName;
     private String authorEmail;

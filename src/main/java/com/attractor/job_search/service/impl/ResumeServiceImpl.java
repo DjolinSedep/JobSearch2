@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Locale;
 import java.util.NoSuchElementException;
 
 @Slf4j
@@ -59,10 +60,10 @@ public class ResumeServiceImpl implements ResumeService {
 
 
     @Override
-    public void create(ResumeDto resumeDto) {
+    public void create(ResumeDto resumeDto, Locale locale) {
         User user = userService.getAuthenticatedUser();
-        educationInfoService.validateEducationDates(resumeDto.getEducationInfoList(), user.getAge());
-        workExperienceInfoService.validateWorkExperience(resumeDto.getWorkExperienceInfoList(), user.getAge());
+        educationInfoService.validateEducationDates(resumeDto.getEducationInfoList(), user.getAge(), locale);
+        workExperienceInfoService.validateWorkExperience(resumeDto.getWorkExperienceInfoList(), user.getAge(), locale);
         Category category = categoryService.getCategoryById(resumeDto.getCategoryId());
         Resume resume = new Resume();
         resume.setName(resumeDto.getName());
@@ -81,12 +82,12 @@ public class ResumeServiceImpl implements ResumeService {
 
 
     @Override
-    public void edit(ResumeDto resumeDto) {
+    public void edit(ResumeDto resumeDto, Locale locale) {
         User user = userService.getAuthenticatedUser();
         Category category = categoryService.getCategoryById(resumeDto.getCategoryId());
 
-        educationInfoService.validateEducationDates(resumeDto.getEducationInfoList(), user.getAge());
-        workExperienceInfoService.validateWorkExperience(resumeDto.getWorkExperienceInfoList(), user.getAge());
+        educationInfoService.validateEducationDates(resumeDto.getEducationInfoList(), user.getAge(), locale);
+        workExperienceInfoService.validateWorkExperience(resumeDto.getWorkExperienceInfoList(), user.getAge(), locale);
 
         Resume resume = getResumeById(resumeDto.getId());
         resume.setName(resumeDto.getName());

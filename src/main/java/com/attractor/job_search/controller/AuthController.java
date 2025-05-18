@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 
+import java.util.Locale;
 import java.util.Map;
 
 @Controller
@@ -38,7 +40,8 @@ public class AuthController {
     public String register(@Valid UserRegistrationDto userDto, BindingResult bindingResult, Model model) {
         if (!bindingResult.hasErrors()) {
             try {
-                userService.registerNewUser(userDto);
+                Locale locale = LocaleContextHolder.getLocale();
+                userService.registerNewUser(userDto, locale);
                 return "redirect:/auth/login";
             } catch (IllegalArgumentException e){
                 model.addAttribute("userRegistrationDto", userDto);
@@ -58,7 +61,8 @@ public class AuthController {
 
     @PostMapping("forgot_password")
     public String forgotPassword(HttpServletRequest request, Model model) {
-        Map<String, Object> attributes = userService.forgotPassword(request);
+        Locale locale = LocaleContextHolder.getLocale();
+        Map<String, Object> attributes = userService.forgotPassword(request, locale);
         if (attributes.containsKey("error")) {
             model.addAllAttributes(attributes);
             return "auth/forgot_password";
@@ -74,7 +78,8 @@ public class AuthController {
 
     @PostMapping("reset_password")
     public String resetPassword(HttpServletRequest request, Model model) {
-        model.addAllAttributes(userService.resetPasswordPost(request));
+        Locale locale = LocaleContextHolder.getLocale();
+        model.addAllAttributes(userService.resetPasswordPost(request, locale));
         return "auth/message";
     }
 }
