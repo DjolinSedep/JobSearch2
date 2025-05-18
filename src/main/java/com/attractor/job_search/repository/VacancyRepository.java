@@ -21,9 +21,9 @@ public interface VacancyRepository extends JpaRepository<Vacancy, Long> {
     @Query(value = "SELECT v.* FROM vacancies v " +
             "LEFT JOIN (SELECT vacancy_id, COUNT(*) as response_count FROM responded_applicants GROUP BY vacancy_id) rc " +
             "ON v.id = rc.vacancy_id " +
-            "WHERE v.user_id = :userId " +
+            "WHERE v.author_id = :userId " +
             "ORDER BY rc.response_count DESC NULLS LAST",
-            countQuery = "SELECT COUNT(*) FROM vacancies v WHERE v.user_id = :userId",
+            countQuery = "SELECT COUNT(*) FROM vacancies v WHERE v.author_id = :userId",
             nativeQuery = true)
     Page<Vacancy> findVacanciesByUserIdOrderByResponsesCount(Long userId, Pageable pageable);
 }

@@ -41,7 +41,7 @@
                             <div class="position-relative">
                                 <i class="bi bi-person input-icon"></i>
                                 <label for="name" class="form-label required-field"><@spring.message "profile.edit.name"/></label>
-                                <@spring.formInput "editedUser.name" 'id="name" class="form-control" placeholder="' + spring.message("profile.edit.name") + '"' />
+                                <@spring.formInput "editedUser.name" 'id="name" class="form-control"' />
                                 <@spring.showErrors "<br>" "error-message" />
                             </div>
                         </div>
@@ -50,7 +50,7 @@
                             <div class="position-relative">
                                 <i class="bi bi-person-badge input-icon"></i>
                                 <label for="surname" class="form-label required-field"><@spring.message "profile.edit.surname"/></label>
-                                <@spring.formInput "editedUser.surname" 'id="surname" class="form-control" placeholder="' + spring.message("profile.edit.surname") + '"' />
+                                <@spring.formInput "editedUser.surname" 'id="surname" class="form-control"' />
                                 <@spring.showErrors "<br>" "error-message" />
                             </div>
                         </div>
@@ -60,7 +60,7 @@
                         <div class="position-relative">
                             <i class="bi bi-telephone input-icon"></i>
                             <label for="phoneNumber" class="form-label required-field"><@spring.message "profile.edit.phoneNumber"/></label>
-                            <@spring.formInput "editedUser.phoneNumber" 'id="phoneNumber" class="form-control" placeholder="' + spring.message("profile.edit.phoneNumber") + '"' />
+                            <@spring.formInput "editedUser.phoneNumber" 'id="phoneNumber" class="form-control"' />
                             <@spring.showErrors "<br>" "error-message" />
                             <div class="form-text"><@spring.message "profile.edit.phoneFormat"/></div>
                         </div>

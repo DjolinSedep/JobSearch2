@@ -46,7 +46,7 @@
                             <div class="position-relative">
                                 <i class="bi bi-person input-icon"></i>
                                 <div class="form-floating">
-                                    <@spring.formInput "userRegistrationDto.name" 'id="name" class="form-control" placeholder="' + spring.message("auth.register.name") + '"' />
+                                    <@spring.formInput "userRegistrationDto.name" 'id="name" class="form-control" placeholder=" "' />
                                     <label for="name"><@spring.message "auth.register.name"/>: </label>
                                 </div>
                                 <@spring.showErrors "<br>" "error text-danger mb-3" />
@@ -57,7 +57,7 @@
                             <div class="position-relative">
                                 <i class="bi bi-person-badge input-icon"></i>
                                 <div class="form-floating">
-                                    <@spring.formInput "userRegistrationDto.surname" 'id="surname" class="form-control" placeholder="' + spring.message("auth.register.surname") + '"' />
+                                    <@spring.formInput "userRegistrationDto.surname" 'id="surname" class="form-control" placeholder=" "' />
                                     <label for="surname"><@spring.message "auth.register.surname"/>: </label>
                                 </div>
                                 <@spring.showErrors "<br>" "error" />
@@ -70,7 +70,7 @@
                             <div class="position-relative">
                                 <i class="bi bi-calendar input-icon"></i>
                                 <div class="form-floating">
-                                    <@spring.formInput "userRegistrationDto.age" 'id="age" class="form-control" placeholder="' + spring.message("auth.register.age") + '" type="number" min="18"' />
+                                    <@spring.formInput "userRegistrationDto.age" 'id="age" class="form-control" placeholder=" " type="number" min="18"' />
                                     <label for="age"><@spring.message "auth.register.age"/>: </label>
                                 </div>
                                 <@spring.showErrors "<br>" "error" />
@@ -81,7 +81,7 @@
                             <div class="position-relative">
                                 <i class="bi bi-envelope input-icon"></i>
                                 <div class="form-floating">
-                                    <@spring.formInput "userRegistrationDto.email" 'id="email" class="form-control" placeholder="' + spring.message("auth.register.email") + '" type="email"' />
+                                    <@spring.formInput "userRegistrationDto.email" 'id="email" class="form-control" placeholder=" " type="email"' />
                                     <label for="email"><@spring.message "auth.register.emailShort"/>: </label>
                                 </div>
                                 <@spring.showErrors "<br>" "error" />
@@ -97,7 +97,7 @@
                             <div class="position-relative">
                                 <i class="bi bi-telephone input-icon"></i>
                                 <div class="form-floating">
-                                    <@spring.formInput "userRegistrationDto.phoneNumber" 'id="phoneNumber" class="form-control" placeholder="' + spring.message("auth.register.phone") + '"' />
+                                    <@spring.formInput "userRegistrationDto.phoneNumber" 'id="phoneNumber" class="form-control" placeholder=" "' />
                                     <label for="phoneNumber"><@spring.message "auth.register.phone"/> </label>
                                 </div>
                                 <@spring.showErrors "<br>" "error" />
@@ -108,7 +108,7 @@
                             <div class="position-relative">
                                 <i class="bi bi-lock input-icon"></i>
                                 <div class="form-floating">
-                                    <@spring.formPasswordInput "userRegistrationDto.password" 'id="password" class="form-control" placeholder="' + spring.message("auth.register.password") + '"' />
+                                    <@spring.formPasswordInput "userRegistrationDto.password" 'id="password" class="form-control" placeholder=" "' />
                                     <label for="password"><@spring.message "auth.register.password"/></label>
                                 </div>
                                 <@spring.showErrors "<br>" "error" />

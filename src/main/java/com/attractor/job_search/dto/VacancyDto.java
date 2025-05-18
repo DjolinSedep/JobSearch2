@@ -32,10 +32,8 @@ public class VacancyDto {
     @Pattern(regexp = "^[1-9]\\d*$", message = "Поле должно содержать только цифры")
     private String salary;
 
-
     @Min(value = 0, message = "Опыт должен быть неотрицательным")
     private Integer expFrom;
-
 
     @Min(value = 0, message = "Опыт должен быть неотрицательным")
     private Integer expTo;

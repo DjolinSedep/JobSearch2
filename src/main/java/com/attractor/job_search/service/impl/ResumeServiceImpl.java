@@ -119,6 +119,7 @@ public class ResumeServiceImpl implements ResumeService {
                 .categoryName(resume.getCategory().getName())
                 .updateTime(resume.getUpdateTime())
                 .userId(resume.getUser().getId())
+                .isActive(resume.getIsActive())
                 .workExperienceInfoList(workExperienceInfoService.convertToWorkExperienceInfoList(resume.getWorkExperienceInfoList()))
                 .educationInfoList(educationInfoService.convertToEducationInfoDtoList(resume.getEducationInfoList()))
                 .contactInfoList(contactInfoService.convertToContactInfoDtoList(resume.getContactInfoList()))

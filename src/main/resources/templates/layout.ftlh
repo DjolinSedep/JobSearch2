@@ -19,7 +19,7 @@
     <body>
     <nav class="navbar navbar-expand-lg sticky-top">
         <div class="container">
-            <a class="navbar-brand" href="/vacancies">Job<span>Search</span></a>
+            <a class="navbar-brand" href="/">Job<span>Search</span></a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -45,10 +45,10 @@
                             <a class="nav-link" href="/vacancies"><@spring.message "layout.nav.vacancies"/></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/#"><@spring.message "layout.nav.about"/></a>
+                            <a class="nav-link" href="/"><@spring.message "layout.nav.about"/></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/#"><@spring.message "layout.nav.contacts"/></a>
+                            <a class="nav-link"><@spring.message "layout.nav.contacts"/></a>
                         </li>
                     </#if>
                 </ul>
@@ -112,27 +112,27 @@
                     <h5 class="footer-title">JobSearch</h5>
                     <p class="text-muted"><@spring.message "layout.footer.tagline"/></p>
                     <div class="mt-3">
-                        <a href="#" class="social-icon"><i class="bi bi-facebook"></i></a>
-                        <a href="#" class="social-icon"><i class="bi bi-twitter"></i></a>
-                        <a href="#" class="social-icon"><i class="bi bi-linkedin"></i></a>
-                        <a href="#" class="social-icon"><i class="bi bi-instagram"></i></a>
+                        <a class="social-icon"><i class="bi bi-facebook"></i></a>
+                        <a class="social-icon"><i class="bi bi-twitter"></i></a>
+                        <a class="social-icon"><i class="bi bi-linkedin"></i></a>
+                        <a class="social-icon"><i class="bi bi-instagram"></i></a>
                     </div>
                 </div>
 
                 <div class="col-lg-2 col-md-4 col-6 mb-4">
                     <h5 class="footer-title"><@spring.message "layout.footer.company"/></h5>
-                    <a href="/about" class="footer-link"><@spring.message "layout.footer.about"/></a>
-                    <a href="/team" class="footer-link"><@spring.message "layout.footer.team"/></a>
-                    <a href="/careers" class="footer-link"><@spring.message "layout.footer.careers"/></a>
-                    <a href="/contact" class="footer-link"><@spring.message "layout.footer.contact"/></a>
+                    <a class="footer-link"><@spring.message "layout.footer.about"/></a>
+                    <a class="footer-link"><@spring.message "layout.footer.team"/></a>
+                    <a class="footer-link"><@spring.message "layout.footer.careers"/></a>
+                    <a class="footer-link"><@spring.message "layout.footer.contact"/></a>
                 </div>
 
                 <div class="col-lg-2 col-md-4 col-6 mb-4">
                     <h5 class="footer-title"><@spring.message "layout.footer.resources"/></h5>
-                    <a href="/#" class="footer-link"><@spring.message "layout.footer.blog"/></a>
-                    <a href="/#" class="footer-link"><@spring.message "layout.footer.guides"/></a>
-                    <a href="/#" class="footer-link"><@spring.message "layout.footer.faq"/></a>
-                    <a href="/#" class="footer-link"><@spring.message "layout.footer.help"/></a>
+                    <a class="footer-link"><@spring.message "layout.footer.blog"/></a>
+                    <a class="footer-link"><@spring.message "layout.footer.guides"/></a>
+                    <a class="footer-link"><@spring.message "layout.footer.faq"/></a>
+                    <a class="footer-link"><@spring.message "layout.footer.help"/></a>
                 </div>
 
                 <div class="col-lg-4 col-md-4 mb-4">
@@ -150,8 +150,8 @@
                     <p class="mb-0">&copy; 2023 JobSearch. <@spring.message "layout.footer.allRightsReserved"/></p>
                 </div>
                 <div class="col-md-6 text-center text-md-end">
-                    <a href="/#" class="text-muted me-3"><@spring.message "layout.footer.privacyPolicy"/></a>
-                    <a href="/#" class="text-muted"><@spring.message "layout.footer.termsOfService"/></a>
+                    <a class="text-muted me-3"><@spring.message "layout.footer.privacyPolicy"/></a>
+                    <a class="text-muted"><@spring.message "layout.footer.termsOfService"/></a>
                 </div>
             </div>
         </div>
