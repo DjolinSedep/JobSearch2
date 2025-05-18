@@ -126,7 +126,7 @@
                     </div>
 
                     <div class="d-flex justify-content-between mt-4">
-                        <a href="/auth/login" class="btn btn-back">
+                        <a href="/" class="btn btn-back">
                             <i class="bi bi-arrow-left me-2"></i> <@spring.message "auth.register.back"/>
                         </a>
                         <button type="submit" class="btn btn-register">
