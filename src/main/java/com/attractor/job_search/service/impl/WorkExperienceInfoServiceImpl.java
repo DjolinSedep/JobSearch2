@@ -11,9 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -47,10 +45,21 @@ public class WorkExperienceInfoServiceImpl implements WorkExperienceInfoService 
 
     @Override
     public void updateOrCreateWorkExperiences(List<WorkExperienceInfoDto> dtoList, Resume resume) {
+        List<WorkExperienceInfo> existingRecords = workExperienceInfoRepository.findByResumeId(resume.getId());
         if (dtoList == null || dtoList.isEmpty()) {
+            workExperienceInfoRepository.deleteAll(existingRecords);
             return;
         }
-        List<WorkExperienceInfo> existingRecords = workExperienceInfoRepository.findByResumeId(resume.getId());
+
+        Set<Long> dtoIds = dtoList.stream()
+                .map(WorkExperienceInfoDto::getId)
+                .filter(Objects::nonNull)
+                .collect(Collectors.toSet());
+
+        existingRecords.stream()
+                .filter(record -> !dtoIds.contains(record.getId()))
+                .forEach(workExperienceInfoRepository::delete);
+
         Map<Long, WorkExperienceInfo> existingRecordsMap = existingRecords.stream()
                 .collect(Collectors.toMap(WorkExperienceInfo::getId, Function.identity(), (a, b) -> a));
 

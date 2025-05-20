@@ -382,7 +382,7 @@
                     <div class="col-md-6">
                         <label for="contactInfoList{index}.contactTypeId" class="form-label"><@spring.message "resume.edit.contactType"/></label>
                         <select class="form-select" id="contactInfoList{index}.contactTypeId"
-                                name="contactInfoList[{index}].contactTypeId">
+                                name="contactInfoList[{index}].contactType.id" required>
                             <option value="" selected disabled><@spring.message "resume.edit.selectContactType"/></option>
                             <#if contactTypes??>
                                 <#list contactTypes as contactType>
@@ -406,7 +406,7 @@
                     <div class="col-md-6">
                         <label for="contactInfoList{index}.value" class="form-label"><@spring.message "resume.edit.contactValue"/></label>
                         <input type="text" class="form-control" id="contactInfoList{index}.value"
-                               name="contactInfoList[{index}].value">
+                               name="contactInfoList[{index}].value required">
                     </div>
                 </div>
             </div>

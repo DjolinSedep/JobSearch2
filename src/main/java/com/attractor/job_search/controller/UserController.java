@@ -74,7 +74,7 @@ public class UserController {
     @GetMapping("profile")
     public String getProfile(Model model,
                              @RequestParam(value = "sort", required = false, defaultValue = "updateTime") String sortField,
-                             @PageableDefault(size = 4) Pageable pageable) {
+                             @PageableDefault(size = 3) Pageable pageable) {
 
         UserDto authenticatedUser = userService.getAuthenticatedUserDto();
         model.addAttribute("user", authenticatedUser);

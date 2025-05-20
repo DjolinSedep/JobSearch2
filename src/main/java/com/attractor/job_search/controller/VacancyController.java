@@ -33,7 +33,7 @@ public class VacancyController {
                                @RequestParam(value = "sort", required = false, defaultValue = "updateTime") String sortField,
                                @RequestParam(value = "category", required = false) Long categoryId,
                                @RequestParam(value = "search", required = false) String searchTerm,
-                               @PageableDefault(size = 20) Pageable pageable) {
+                               @PageableDefault(size = 6) Pageable pageable) {
 
         Page<VacancyDto> vacancies = vacancyService.getFilteredVacancies(
                 categoryId, sortField, searchTerm, pageable);

@@ -12,9 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -48,11 +46,20 @@ public class EducationInfoServiceImpl implements EducationInfoService {
 
     @Override
     public void updateOrCreateEducations(List<EducationInfoDto> dtoList, Resume resume) {
+        List<EducationInfo> existingRecords = educationInfoRepository.findByResumeId(resume.getId());
         if (dtoList == null || dtoList.isEmpty()) {
+            educationInfoRepository.deleteAll(existingRecords);
             return;
         }
+        Set<Long> dtoIds = dtoList.stream()
+                .map(EducationInfoDto::getId)
+                .filter(Objects::nonNull)
+                .collect(Collectors.toSet());
 
-        List<EducationInfo> existingRecords = educationInfoRepository.findByResumeId(resume.getId());
+        existingRecords.stream()
+                .filter(record -> !dtoIds.contains(record.getId()))
+                .forEach(educationInfoRepository::delete);
+
         Map<Long, EducationInfo> existingRecordsMap = existingRecords.stream()
                 .collect(Collectors.toMap(EducationInfo::getId, Function.identity(), (a, b) -> a));
         for (EducationInfoDto dto : dtoList) {

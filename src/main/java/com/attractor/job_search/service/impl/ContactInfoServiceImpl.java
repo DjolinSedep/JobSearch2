@@ -13,6 +13,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -47,41 +49,41 @@ public class ContactInfoServiceImpl implements ContactInfoService {
 
     @Override
     public void updateOrCreateContacts(List<ContactInfoDto> dtoList, Resume resume) {
+        List<ContactInfo> existingRecords = contactInfoRepository.findByResumeId(resume.getId());
         if (dtoList == null || dtoList.isEmpty()) {
-            System.out.println("return");
+            contactInfoRepository.deleteAll(existingRecords);
             return;
         }
-        System.out.println("Получено: " + dtoList.size());
-        System.out.println("И этто: " + dtoList.getFirst().getValue());
+        Set<Long> dtoIds = dtoList.stream()
+                .map(ContactInfoDto::getId)
+                .filter(Objects::nonNull)
+                .collect(Collectors.toSet());
 
-        System.out.println("noreturn");
-        List<ContactInfo> existingRecords = contactInfoRepository.findByResumeId(resume.getId());
+
+        existingRecords.stream()
+                .filter(record -> !dtoIds.contains(record.getId()))
+                .forEach(contactInfoRepository::delete);
+
         Map<Long, ContactInfo> existingRecordsMap = existingRecords.stream()
                 .collect(Collectors.toMap(ContactInfo::getId, Function.identity(), (a, b) -> a));
 
         for (ContactInfoDto dto : dtoList) {
             if (!hasContactData(dto)) {
-                System.out.println("continue");
                 continue;
             }
-            System.out.println("nocontinue");
             ContactInfo contactInfo;
 
             if (dto.getId() != null && existingRecordsMap.containsKey(dto.getId())) {
-                System.out.println("existing record found");
                 contactInfo = existingRecordsMap.get(dto.getId());
             } else {
-                System.out.println("new record found");
                 contactInfo = new ContactInfo();
                 contactInfo.setResume(resume);
             }
             if(dto.getContactType().getId() != null){
-                System.out.println("contactType found");
                 ContactType contactType = contactTypeService.getContactTypeById(dto.getContactType().getId());
                 contactInfo.setContactType(contactType);
             }
 
-            System.out.println("setting");
             contactInfo.setContactValue(dto.getValue());
 
             contactInfoRepository.save(contactInfo);
