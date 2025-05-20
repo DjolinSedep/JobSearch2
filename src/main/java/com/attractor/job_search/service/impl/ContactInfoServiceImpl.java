@@ -29,6 +29,7 @@ public class ContactInfoServiceImpl implements ContactInfoService {
         if (dtoList == null || dtoList.isEmpty()) {
             return;
         }
+        System.out.println("Получено: " + dtoList.size());
 
         for (ContactInfoDto dto : dtoList) {
             if (!hasContactData(dto)) {
@@ -50,6 +51,8 @@ public class ContactInfoServiceImpl implements ContactInfoService {
             System.out.println("return");
             return;
         }
+        System.out.println("Получено: " + dtoList.size());
+        System.out.println("И этто: " + dtoList.getFirst().getValue());
 
         System.out.println("noreturn");
         List<ContactInfo> existingRecords = contactInfoRepository.findByResumeId(resume.getId());
@@ -57,7 +60,6 @@ public class ContactInfoServiceImpl implements ContactInfoService {
                 .collect(Collectors.toMap(ContactInfo::getId, Function.identity(), (a, b) -> a));
 
         for (ContactInfoDto dto : dtoList) {
-            System.out.println(dto.getValue() + dto.getContactType().getType() + dto.getValue());
             if (!hasContactData(dto)) {
                 System.out.println("continue");
                 continue;
