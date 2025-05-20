@@ -31,16 +31,18 @@ public class ContactInfoServiceImpl implements ContactInfoService {
         if (dtoList == null || dtoList.isEmpty()) {
             return;
         }
-        System.out.println("Получено: " + dtoList.size());
 
         for (ContactInfoDto dto : dtoList) {
             if (!hasContactData(dto)) {
                 continue;
             }
-            ContactType contactType = contactTypeService.getContactTypeById(dto.getContactType().getId());
+
             ContactInfo contactInfo = new ContactInfo();
+            if (dto.getContactType() != null && dto.getContactType().getId() != null) {
+                ContactType contactType = contactTypeService.getContactTypeById(dto.getContactType().getId());
+                contactInfo.setContactType(contactType);
+            }
             contactInfo.setResume(resume);
-            contactInfo.setContactType(contactType);
             contactInfo.setContactValue(dto.getValue());
 
             contactInfoRepository.save(contactInfo);
