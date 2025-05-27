@@ -186,4 +186,62 @@
             <a href="/vacancies" class="btn btn-primary"><@spring.message "vacancies.list.showAllVacancies"/></a>
         </div>
     </#if>
+
+    <script>
+        const STORAGE_KEY = "vacancyFilters";
+        const urlParams = new URLSearchParams(window.location.search);
+        const form = document.querySelector('.search-form');
+
+        form.addEventListener("submit", () => {
+            const filters = {
+                search: form.querySelector('input[name="search"]').value,
+                category: form.querySelector('select[name="category"]').value,
+                sort: form.querySelector('select[name="sort"]').value,
+                page: "0"
+            };
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(filters));
+        });
+
+
+        window.addEventListener("DOMContentLoaded", () => {
+            const saved = JSON.parse(localStorage.getItem(STORAGE_KEY));
+            if (!saved) return;
+
+            document.querySelectorAll('.pagination a.page-link').forEach(link => {
+                const url = new URL(link.href);
+                const page = url.searchParams.get("page");
+
+                if (saved.search) url.searchParams.set("search", saved.search);
+                if (saved.category) url.searchParams.set("category", saved.category);
+                if (saved.sort) url.searchParams.set("sort", saved.sort);
+                if (page !== null) {
+                    url.searchParams.set("page", page);
+                }
+
+
+                link.addEventListener("click", () => {
+                    saved.page = page || "0";
+                    localStorage.setItem(STORAGE_KEY, JSON.stringify(saved));
+                });
+
+                link.href = url.toString();
+            });
+
+            const hasParams = ["search", "category", "sort", "page"].some(p => urlParams.has(p));
+            if (!hasParams) {
+                const redirectParams = new URLSearchParams();
+                if (saved.search) redirectParams.set("search", saved.search);
+                if (saved.category) redirectParams.set("category", saved.category);
+                if (saved.sort) redirectParams.set("sort", saved.sort);
+                if (saved.page) redirectParams.set("page", saved.page);
+
+                if ([...redirectParams].length > 0) {
+                    window.location.href = window.location.pathname + "?" + redirectParams.toString();
+                }
+            }
+        });
+
+    </script>
+
 </@main.layout>
+
